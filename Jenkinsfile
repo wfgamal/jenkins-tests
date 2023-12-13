@@ -1,9 +1,9 @@
 pipeline {
   agent any
-  //  tools {
-  //     maven 'maven-3.9.6' 
+   tools {
+      mvn 'Maven 3.9.5' 
         
-  //   }
+    }
   // environment {
   //   deploymentName = "devsecops"
   //   containerName = "devsecops-container"
