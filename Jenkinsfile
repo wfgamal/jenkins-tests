@@ -10,7 +10,7 @@ pipeline {
   // }
   tools {
         // Define tools here
-        maven 'Maven-3.9.6' // Example Maven tool configuration
+        maven 'Maven-3.9.5' // Example Maven tool configuration
         
     }
   stages {
@@ -24,7 +24,7 @@ pipeline {
 
     stage('Build Artifact - Maven') {
       steps {
-        tool name: 'Maven', type: 'Tool'
+        tool name: 'maven', type: 'Tool'
         sh 'mvn clean package'
       }
     }
