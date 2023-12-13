@@ -43,7 +43,7 @@ stage('Unit test- Maven') {
         sh "mvn test"
       post {
         always {
-            junit '**/target/surefire-reports/**/*.xml'
+            junit '**/target/surefire-reports/*.xml'
             // Publish JaCoCo code coverage report
             jacoco(execPattern: '**/target/jacoco.exec')
         }
