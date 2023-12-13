@@ -16,12 +16,6 @@ pipeline {
   stages {
 
 
-    stage('Workspace Cleanup') {
-            steps {
-                cleanWs()
-            }
-        }
-
     stage('Build Artifact - Maven') {
       steps {
         script {
