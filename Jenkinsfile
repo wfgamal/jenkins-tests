@@ -8,7 +8,11 @@ pipeline {
   //   applicationURL="http://devsecops-demo.eastus.cloudapp.azure.com"
   //   applicationURI="/increment/99"
   // }
-
+  tools {
+        // Define tools here
+        maven 'Maven-3.9.6' // Example Maven tool configuration
+        
+    }
   stages {
 
 
