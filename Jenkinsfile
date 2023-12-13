@@ -36,5 +36,21 @@ stage('Build Artifact - Maven') {
                 }
       }
     }
+
+stage('Unit test- Maven') {
+      steps {
+        script {
+                    
+                    sh "mvn test"
+      post {
+        always {
+            junit '**/target/surefire-reports/**/*.xml'
+            // Publish JaCoCo code coverage report
+            jacoco(execPattern: '**/target/jacoco.exec')
+        }
+    }    
+                }
+      }
+    }    
   }
 }
