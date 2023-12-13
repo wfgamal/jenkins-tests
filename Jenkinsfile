@@ -30,8 +30,8 @@ pipeline {
 tage('Build Artifact - Maven') {
       steps {
         script {
-                    def mvnHome = tool name: 'maven', type: 'Tool'
-                    sh "${mvnHome}/bin/mvn clean package"
+                    
+                    sh "mvn clean package"
                 }
       }
     }
