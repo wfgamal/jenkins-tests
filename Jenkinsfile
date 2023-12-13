@@ -13,7 +13,7 @@ pipeline {
         maven 'Maven-3.9.5' // Example Maven tool configuration
         
     }
-  stages {
+stages {
 
 
     // stage('Build Artifact - Maven') {
@@ -41,12 +41,17 @@ stage('Unit test- Maven') {
       steps {
                     
         sh "mvn test"
-                
-      }
+                }
+            } 
 
-    } 
-    
-       
+stage('SonarQube - SAST') {
+      steps {
+                    
+        withSonarQubeEnv('sonarqube') {
+      sh "mvn clean verify sonar:sonar -Dsonar.projectKey=devsecops -Dsonar.projectName='devsecops'"
+    }
+                }
+            }             
   }
 
 post {
