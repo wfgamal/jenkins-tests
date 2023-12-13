@@ -39,9 +39,8 @@ stage('Build Artifact - Maven') {
 
 stage('Unit test- Maven') {
       steps {
-        script {
                     
-                    sh "mvn test"
+        sh "mvn test"
       post {
         always {
             junit '**/target/surefire-reports/**/*.xml'
@@ -49,7 +48,7 @@ stage('Unit test- Maven') {
             jacoco(execPattern: '**/target/jacoco.exec')
         }
     }    
-                }
+                
       }
     }    
   }
