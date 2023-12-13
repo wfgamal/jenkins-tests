@@ -11,8 +11,16 @@ pipeline {
 
   stages {
 
+
+    stage('Workspace Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
+
     stage('Build Artifact - Maven') {
       steps {
+        tool name: 'Maven', type: 'Tool'
         sh 'mvn clean package'
       }
     }
