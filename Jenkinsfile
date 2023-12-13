@@ -27,7 +27,7 @@ pipeline {
   
 
 
-tage('Build Artifact - Maven') {
+stage('Build Artifact - Maven') {
       steps {
         script {
                     
