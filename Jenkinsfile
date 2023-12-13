@@ -32,6 +32,7 @@ stage('Build Artifact - Maven') {
         script {
                     
                     sh "mvn clean package"
+                    archive 'target/*.jar'
                 }
       }
     }
