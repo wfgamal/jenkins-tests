@@ -8,13 +8,12 @@ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:
 
 exit_code $?
 
-echo "Exit Code: ${exit_code}"
+echo "Exit Code:" ${exit_code}
 
 if [[ ${exit_code} -eq 1 ]]; then
    echo " Critical vulnerabilities found in your image ${imageName} "
    exit 1
 else
    echo "Image ${imageName} has no vulnerabilities"   
-   exit 0
 
  fi  

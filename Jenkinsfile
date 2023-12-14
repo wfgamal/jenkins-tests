@@ -11,7 +11,7 @@ pipeline {
   tools {
         // Define tools here
         maven 'Maven-3.9.5' // Example Maven tool configuration
-        
+        docker
     }
 stages {
 
