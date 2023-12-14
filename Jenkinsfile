@@ -51,7 +51,18 @@ stage('SonarQube - SAST') {
       sh "mvn clean verify sonar:sonar -Dsonar.projectKey=devsecops -Dsonar.projectName='devsecops'"
     }
                 }
-            }             
+            } 
+
+stage("SonarQube - Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+
+
+
   }
 
 post {
