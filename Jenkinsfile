@@ -11,7 +11,7 @@ pipeline {
   tools {
         // Define tools here
         maven 'Maven-3.9.5' // Example Maven tool configuration
-        docker 'docker'
+        
     }
 stages {
 
@@ -62,6 +62,12 @@ stage("SonarQube - Quality Gate") {
           }
 
 stage("Trivy - Base Image scan") {
+  agent {
+   docker {
+      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+    }
+  }
             steps {
               sh " bash trivyscan.sh"
               }
