@@ -66,7 +66,7 @@ stage("Trivy - Base Image scan") {
               sh " bash trivyscan.sh"
               }
             }
-          }
+          
 
 
   }
