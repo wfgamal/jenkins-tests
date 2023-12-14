@@ -61,6 +61,12 @@ stage("SonarQube - Quality Gate") {
             }
           }
 
+stage("Trivy - Base Image scan") {
+            steps {
+              sh " bash trivyscan.sh"
+              }
+            }
+          }
 
 
   }
