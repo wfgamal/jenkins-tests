@@ -1,6 +1,10 @@
 pipeline {
-  agent any
-  // environment {
+  agent {
+   docker {
+      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+    }
+  }
   //   deploymentName = "devsecops"
   //   containerName = "devsecops-container"
   //   serviceName = "devsecops-svc"
@@ -62,12 +66,7 @@ stage("SonarQube - Quality Gate") {
           }
 
 stage("Trivy - Base Image scan") {
-  agent {
-   docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-    }
-  }
+  
             steps {
               sh " bash trivyscan.sh"
               }
