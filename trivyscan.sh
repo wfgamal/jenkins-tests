@@ -11,7 +11,7 @@ exit_code=$?
 echo "Exit Code: $exit_code"
 
 if [[ "${exit_code}" == 1 ]]; then
-   echo " Critical vulnerabilities found in your image ${imageName} "
+   echo " Critical vulnerabilities found in your image: ${imageName} "
    exit 1
 else
    echo "Image ${imageName} has no vulnerabilities"   
