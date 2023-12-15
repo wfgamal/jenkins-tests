@@ -6,9 +6,9 @@ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:
 docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.38.3 --exit-code 1 --severity CRITICAL image ${imageName}
 
 
-exit_code $?
+exit_code = $?
 
-echo "Exit Code:" ${exit_code}
+echo "Exit Code: ${exit_code}"
 
 if [[ ${exit_code} -eq 1 ]]; then
    echo " Critical vulnerabilities found in your image ${imageName} "
