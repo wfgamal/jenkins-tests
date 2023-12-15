@@ -24,13 +24,6 @@ stages {
     //   }
     // }
   
-stage('Clean Workspace') {
-            steps {
-                // Clean the workspace
-                cleanWs()
-            }
-        }
-        
 
 stage('Build Artifact - Maven') {
       steps {
