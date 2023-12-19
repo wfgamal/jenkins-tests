@@ -65,7 +65,7 @@ stage("Vulnerability Scan - Docker"){
             steps {
               sh " bash trivyscan.sh"
               }
-            },
+            }
       stage("OPA Conftest -Dockerfile") {
   
             steps {
