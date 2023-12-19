@@ -77,7 +77,7 @@ stage(" Docker Build & Push") {
         withDockerRegistry(credentialsId: 'dockerhub-cred', url: '') {
           sh 'printenv'
           sh 'docker build -t $imageName:"$BUILD_NUMBER" .'
-          sh 'docker push $imageName:"BUILD_NUMBER"'
+          sh 'docker push $imageName:"$BUILD_NUMBER"'
         }
       }
             }            
