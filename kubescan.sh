@@ -12,3 +12,4 @@ if [[ "$score" < 6 ]];then
 else
   echo "Your YAML files has the correct score: $score "
   exit 0
+fi
