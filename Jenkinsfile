@@ -77,30 +77,24 @@ stage("Vulnerability Scan - Docker"){
   
 }
 
-// stage("Trivy - Base Image scan") {
-  
-//             steps {
-//               sh " bash trivyscan.sh"
-//               }
-//             }
-          
-// stage("OPA Conftest -Dockerfile") {
-  
-//             steps {
-//               sh "docker run --rm -v \$(pwd):/project openpolicyagent/conftest test --policy dockerfile-opa-scan.rego Dockerfile"
-//               }
-//             }
 
 stage(" Docker Build & Push") {
           
-              steps {
+      steps {
         withDockerRegistry(credentialsId: 'dockerhub-cred', url: '') {
           sh 'printenv'
           sh 'docker build -t $imageName:"$BUILD_NUMBER" .'
           sh 'docker push $imageName:"$BUILD_NUMBER"'
         }
       }
-            }            
+            }   
+
+stage("Kubesec - k8s scans") {
+  
+      steps {
+              sh "curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan"
+              }
+            }                     
 
   }
 
