@@ -60,10 +60,10 @@ stage("SonarQube - Quality Gate") {
 stage("Vulnerability Scan - Docker"){
   steps{
     parallel{
-      "Trivy - Base Image scan":{
-        sh " bash trivyscan.sh"
+      "Trivy - BaseImage scan"{
+        sh "bash trivyscan.sh"
       },
-      "OPA Conftest -Dockerfile":{
+      "OPA Conftest - Dockerfile"{
 
         sh "docker run --rm -v \$(pwd):/project openpolicyagent/conftest test --policy dockerfile-opa-scan.rego Dockerfile"
       }
