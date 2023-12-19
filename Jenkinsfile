@@ -69,15 +69,19 @@ stage("Trivy - Base Image scan") {
 stage("OPA Conftest -Dockerfile") {
   
             steps {
-              sh "docker run -rm -v \$(pwd):/project openpolicyagent/conftest test -policy dockerfile-opa-scan.rego Dockerfile"
+              sh "docker run --rm -v \$(pwd):/project openpolicyagent/conftest test --policy dockerfile-opa-scan.rego Dockerfile"
               }
             }
 
 // stage(" Docker Build & Push") {
-  
-//             steps {
-//               sh "print"
-//               }
+          
+//               steps {
+//         withDockerRegistry([credentialsId: "dockerhub-token", url: ""]) {
+//           sh 'printenv'
+//           sh 'sudo docker build -t wfgamal/numeric-app:"$BUILD_NUMBERIT" .'
+//           sh 'docker push wfgamal/numeric-app:"BUILD_NUMBER"'
+//         }
+//       }
 //             }            
 
   }
