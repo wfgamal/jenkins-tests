@@ -1,5 +1,5 @@
 #! /bin/bash
-score=(curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan | grep score | awk '{print $2}' | sed 's/,$//')
+score=("curl -sSX POST --data-binary @\"k8s_deployment_service.yaml\" https://v2.kubesec.io/scan | grep score | awk '{print $2}' | sed 's/,$//'")
 
 eit_code=$?
 
