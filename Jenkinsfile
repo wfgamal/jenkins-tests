@@ -1,13 +1,11 @@
 pipeline {
   agent any
-  // environment {
-  //   deploymentName = "devsecops"
-  //   containerName = "devsecops-container"
-  //   serviceName = "devsecops-svc"
-  //   imageName = "siddharth67/numeric-app:${GIT_COMMIT}"
-  //   applicationURL="http://devsecops-demo.eastus.cloudapp.azure.com"
-  //   applicationURI="/increment/99"
-  // }
+  environment {
+    
+    imageName = "wfgamal/numeric-app"
+    
+    
+  }
   tools {
         // Define tools here
         maven 'Maven-3.9.5' // Example Maven tool configuration  
@@ -73,16 +71,16 @@ stage("OPA Conftest -Dockerfile") {
               }
             }
 
-// stage(" Docker Build & Push") {
+stage(" Docker Build & Push") {
           
-//               steps {
-//         withDockerRegistry([credentialsId: "dockerhub-token", url: ""]) {
-//           sh 'printenv'
-//           sh 'sudo docker build -t wfgamal/numeric-app:"$BUILD_NUMBERIT" .'
-//           sh 'docker push wfgamal/numeric-app:"BUILD_NUMBER"'
-//         }
-//       }
-//             }            
+              steps {
+        withDockerRegistry([credentialsId: "dockerhub-token", url: ""]) {
+          sh 'printenv'
+          sh 'docker build -t $imageName:"$BUILD_NUMBER" .'
+          sh 'docker push $imageName:"BUILD_NUMBER"'
+        }
+      }
+            }            
 
   }
 
