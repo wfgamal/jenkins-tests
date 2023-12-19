@@ -69,7 +69,7 @@ stage("Trivy - Base Image scan") {
 stage("OPA Conftest -Dockerfile") {
   
             steps {
-              sh "sudo docker run - rm -v \$(pwd):/project openpolicyagent/conftest test - policy dockerfile-opa-scan.rego Dockerfile"
+              sh "docker run - rm -v \$(pwd):/project openpolicyagent/conftest test - policy dockerfile-opa-scan.rego Dockerfile"
               }
             }
 
