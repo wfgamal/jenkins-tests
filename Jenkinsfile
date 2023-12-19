@@ -92,7 +92,7 @@ stage(" Docker Build & Push") {
 stage("Kubesec - k8s scans") {
   
       steps {
-              sh "curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan"
+              sh 'curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan'
               }
             }                     
 
