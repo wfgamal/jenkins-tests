@@ -57,19 +57,34 @@ stage("SonarQube - Quality Gate") {
             }
           }
 
-stage("Trivy - Base Image scan") {
+stage("Vulnerability Scan - Docker"){
+  steps{
+    parallel{
+      "Trivy - Base Image scan":{
+        sh " bash trivyscan.sh"
+      },
+      "OPA Conftest -Dockerfile":{
+
+        sh "docker run --rm -v \$(pwd):/project openpolicyagent/conftest test --policy dockerfile-opa-scan.rego Dockerfile"
+      }
+
+    }
+  }
+}
+
+// stage("Trivy - Base Image scan") {
   
-            steps {
-              sh " bash trivyscan.sh"
-              }
-            }
+//             steps {
+//               sh " bash trivyscan.sh"
+//               }
+//             }
           
-stage("OPA Conftest -Dockerfile") {
+// stage("OPA Conftest -Dockerfile") {
   
-            steps {
-              sh "docker run --rm -v \$(pwd):/project openpolicyagent/conftest test --policy dockerfile-opa-scan.rego Dockerfile"
-              }
-            }
+//             steps {
+//               sh "docker run --rm -v \$(pwd):/project openpolicyagent/conftest test --policy dockerfile-opa-scan.rego Dockerfile"
+//               }
+//             }
 
 stage(" Docker Build & Push") {
           
