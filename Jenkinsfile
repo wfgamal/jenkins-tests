@@ -74,7 +74,7 @@ stage("OPA Conftest -Dockerfile") {
 stage(" Docker Build & Push") {
           
               steps {
-        withDockerRegistry(credentialsId: 'dockerhub-cred')  {
+        withDockerRegistry(credentialsId: 'dockerhub-cred', url: 'https://hub.docker.com/') {
           sh 'printenv'
           sh 'docker build -t $imageName:"$BUILD_NUMBER" .'
           sh 'docker push $imageName:"BUILD_NUMBER"'
