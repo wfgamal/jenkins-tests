@@ -58,7 +58,7 @@ stage("SonarQube - Quality Gate") {
           }
 
 stage("Vulnerability Scan - Docker"){
-  steps{
+  
     parallel{
       stage("Trivy - Base Image scan") {
   
@@ -74,7 +74,7 @@ stage("Vulnerability Scan - Docker"){
             }
 
     }
-  }
+  
 }
 
 // stage("Trivy - Base Image scan") {
