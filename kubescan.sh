@@ -1,7 +1,7 @@
 #! /bin/bash
 
-sudo apt-get update
-sudo apt-get install jq
+sudo sudo -u jenkins apt-get update
+sudo sudo -u jenkins apt-get install jq -y
 
 
 
