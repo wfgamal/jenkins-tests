@@ -1,7 +1,7 @@
 #! /bin/bash
 
-sudo apt-get update
-sudo apt-get install jq
+apt-get update
+apt-get install jq
 
 
 
