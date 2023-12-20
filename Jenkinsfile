@@ -13,15 +13,6 @@ pipeline {
 stages {
 
 
-    // stage('Build Artifact - Maven') {
-    //   steps {
-    //     script {
-    //                 def mvnHome = tool name: 'Maven-3.9.5', type: 'Tool'
-    //                 sh "${mvnHome}/bin/mvn clean package"
-    //             }
-    //   }
-    // }
-  
 
 stage('Build Artifact - Maven') {
       steps {
