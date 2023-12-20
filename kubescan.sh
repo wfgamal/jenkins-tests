@@ -1,5 +1,12 @@
 #! /bin/bash
-score=$(curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan | grep -i "score" | awk '{print $2}' | sed 's/,$//')
+
+sudo apt-get update
+sudo apt-get install jq
+
+
+
+scan_score=$(curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan | jq .[0].score ) 
+# score=$(curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan | grep -i "score" | awk '{print $2}' | sed 's/,$//')
 
 
 exit_code=$?
