@@ -96,15 +96,17 @@ stage("Kubesec - k8s scans") {
 stage("Deploy to k8s") {
   
       steps {
-        script{
-
+        
+      withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'kubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443') {
           sh """
             sed -i 's/replace/${imageNameK8s}:${BUILD_NUMBER}/g' k8s_deployment_service.yaml
             kubectl deploy -f k8s_deployment_service.yaml
 
           """
 
-        }
+        
+}
+          
               
               }
             }                     
@@ -113,7 +115,7 @@ stage("Deploy to k8s") {
   }                             
 
 
-  }
+}  
 
 post {
       always {
@@ -121,5 +123,4 @@ post {
             // Publish JaCoCo code coverage report
             jacoco(execPattern: '**/target/jacoco.exec')
         }
-    }    
-}
+}    
