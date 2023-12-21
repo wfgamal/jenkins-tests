@@ -1,5 +1,9 @@
 #! /bin/bash
 
+
+chmod 777 /var/lib/apt/lists/lock
+chmod 777 /var/lib/apt/lists/
+chmod 777 /var/lib/dpkg/lock-frontend
 apt-get update
 apt-get install jq -y
 
