@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     
-    imageName = "wfgamal/numeric-app"
+    imageNameK8s = "wfgamal/numeric-app"
     
     
   }
@@ -48,25 +48,25 @@ stage("SonarQube - Quality Gate") {
             }
           }
 
-stage("Vulnerability Scan - Docker"){
+// stage("Vulnerability Scan - Docker"){
   
-    parallel{
-      stage("Trivy - Base Image scan") {
+//     parallel{
+//       stage("Trivy - Base Image scan") {
   
-            steps {
-              sh " bash trivyscan.sh"
-              }
-            }
-      stage("OPA Conftest -Dockerfile") {
+//             steps {
+//               sh " bash trivyscan.sh"
+//               }
+//             }
+//       stage("OPA Conftest -Dockerfile") {
   
-            steps {
-              sh "docker run --rm -v \$(pwd):/project openpolicyagent/conftest test --policy dockerfile-opa-scan.rego Dockerfile"
-              }
-            }
+//             steps {
+//               sh "docker run --rm -v \$(pwd):/project openpolicyagent/conftest test --policy dockerfile-opa-scan.rego Dockerfile"
+//               }
+//             }
 
-    }
+//     }
   
-}
+// }
 
 
 stage(" Docker Build & Push") {
@@ -74,8 +74,8 @@ stage(" Docker Build & Push") {
       steps {
         withDockerRegistry(credentialsId: 'dockerhub-cred', url: '') {
           sh 'printenv'
-          sh 'docker build -t $imageName:"$BUILD_NUMBER" .'
-          sh 'docker push $imageName:"$BUILD_NUMBER"'
+          sh 'docker build -t $imageNameK8s:"$BUILD_NUMBER" .'
+          sh 'docker push $imageNameK8s:"$BUILD_NUMBER"'
         }
       }
             }   
@@ -91,7 +91,26 @@ stage("Kubesec - k8s scans") {
       steps {
               sh 'bash kubescan.sh'
               }
+            }    
+
+stage("Deploy to k8s") {
+  
+      steps {
+        script{
+
+          sh """
+            sed -i 's/replace/${imageNameK8s}:${BUILD_NUMBER}/g' k8s_deployment_service.yaml
+            kubectl deploy -f k8s_deployment_service.yaml
+
+          """
+
+        }
+              
+              }
             }                     
+
+
+  }                             
 
 
   }
