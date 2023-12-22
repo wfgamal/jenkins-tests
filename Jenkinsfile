@@ -9,7 +9,7 @@ pipeline {
   tools {
         // Define tools here
         maven 'Maven-3.9.5' // Example Maven tool configuration  
-        kubectl 'kubectl'
+        // kubectl 'kubectl'
     }
 stages {
 
@@ -96,7 +96,7 @@ stage("Deploy to k8s") {
       withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'kubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443') {
           sh """
             sed -i 's#replace#${imageNameK8s}:${BUILD_NUMBER}#g' k8s_deployment_service.yaml
-            kubectl apply -f k8s_deployment_service.yaml
+           
 
           """
 
