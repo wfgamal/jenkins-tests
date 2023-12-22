@@ -93,7 +93,7 @@ stage("Deploy to k8s") {
   
       steps {
         
-      withKubeConfig(caCertificate: '-----BEGIN CERTIFICATE-----
+      withKubeConfig(caCertificate: '''-----BEGIN CERTIFICATE-----
 MIIDBjCCAe6gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p
 a3ViZUNBMB4XDTIzMDYyMzE2MDYzN1oXDTMzMDYyMTE2MDYzN1owFTETMBEGA1UE
 AxMKbWluaWt1YmVDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL+M
@@ -111,7 +111,7 @@ XEc6MjKI/lt/k6m9dN7pgMmbx/jSnfKFrhiWxFJ808fDaWdf2+SROrUVCUqH7hqS
 gLVL0lpmlcJcJFadfbomWD6Y/geBtIeRepDmaavxLF4FyjmQS3VDwvDjeVkF0BgS
 muKsu9ahCU5pNVrxIHaC/P/R+qGuWUXv2cWiMLRa4HYPoHzk4mQgKbctNZDKobii
 xokRzgLH3CltKw==
------END CERTIFICATE-----', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'kubeconfig-certs', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443') {
+-----END CERTIFICATE-----''', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'kubeconfig-certs', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: '192.168.49.2:8443') {
           
             sh "sed -i \"s#replace#${imageNameK8s}#g\" k8s_deployment_service.yaml"
             sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
